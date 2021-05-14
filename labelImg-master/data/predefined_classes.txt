@@ -1,6 +1,8 @@
+Jacket
+Shirt
+Trousers
+Skirt
+Swimwear
+Towel
 stain
 defect_free
-check
-check_stain
-stripe
-stripe_stain
