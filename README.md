@@ -5,15 +5,33 @@
 
 #
 **:book: Contents**
-1. [Data](#1-data)
+1. [Darknet](#1-darknet)
+2. [Dataset](#2-dataset)
+3. [Config](#3-config)
+4. [Train](#4-train)
 
 
 ---
+## 1. Darknet
+* [AlexeyAB 의 darknet](https://github.com/AlexeyAB/darknet) 
+  * mAP, loss, iteration 등을 추적하면서 연구하기 편해서 사용했다. 
 
-## 1. Data
-* Google Open Images Dataset V6
-* Tilda
-* Kaggle
+## 2. Dataset
+* Google Open Images Dataset V6(Clothes, Button data)
+* Tilda(Stain data)
+* Kaggle(Stain data)
+* Google 이미지(Stain, Button data)
+
+[Yolo Mark](https://github.com/AlexeyAB/Yolo_mark)를 이용해 라벨링
+
+## 3. Config
+* obj.cfg 
+* obj.data
+  * train.txt
+  * valid.txt
+* obj.names
+
+## 4. Train
 
 ---
 
