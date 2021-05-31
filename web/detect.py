@@ -1,6 +1,6 @@
 import numpy as np
 import argparse
-import time
+import time, math
 import cv2
 import os
 from flask import Flask, request, Response, jsonify, render_template
@@ -75,7 +75,7 @@ def get_predection(image, net, LABELS, COLORS):
     net.setInput(blob)
     start = time.time()
     layerOutputs = net.forward(ln)
-    print(layerOutputs)
+    # print(layerOutputs)
     end = time.time()
 
     # show timing information on YOLO
@@ -96,7 +96,7 @@ def get_predection(image, net, LABELS, COLORS):
             scores = detection[5:]
             # print(scores)
             classID = np.argmax(scores)
-            # print(classID)
+            # print("class"+str(classID))
             confidence = scores[classID]
 
             # filter out weak predictions by ensuring the detected
@@ -130,25 +130,50 @@ def get_predection(image, net, LABELS, COLORS):
         # loop over the indexes we are keeping
         for i in idxs.flatten():
             # extract the bounding box coordinates
-            (x, y) = (boxes[i][0], boxes[i][1])
-            (w, h) = (boxes[i][2], boxes[i][3])
+            (x, y) = (boxes[i][0], boxes[i][1]) #시작지점
+            (w, h) = (boxes[i][2], boxes[i][3]) #가로 세로 길이
 
             # draw a bounding box rectangle and label on the image
             # color = [int(c) for c in COLORS[classIDs[i]]]
             color=[0,0,0]
+
+            # w = math.ceil(w*1.8)
+            # h = math.ceil(h*1.8)
+            # if w >h:
+            #     w = math.ceil(w*1.5)
+            # else:
+            #     h = math.ceil(h*1.5)
+            # y *=2
+            
             cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
             text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
-            print(boxes)
-            print(classIDs)
-            print(confidences[i])
-            cv2.putText(image, text, (x, y - 5),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+            if LABELS[classIDs[i]] == 'stain':
+                #putText함수는 \n을 구분해내지 못하기 때문에 수동적으로 처리해야한다. 
+                stain_size = "\n{}*{} = {}".format(w,h,w*h)
+                # print(stain_size)
+                text += stain_size
+                print(text)
+            else:
+                # print(boxes)
+                print(LABELS[classIDs[i]],confidences[i])
+                # print(classIDs)
+                # print(confidences[i])
+            # get dimensions of image
+            dimensions = image.shape
+            
+            # height, width, number of channels in image
+            height = dimensions[0]
+            width = dimensions[1]
+            # channels = img.shape[2]
+            # print(width,height)
+            cv2.putText(image, text, (x, y-5), #이미지, 출력문자, 출력위치
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2) #폰트, 폰트크기, 색상, 두께
     return image
 
-
-labelsPath = "classes.names"
-cfgpath = "stain_custom.cfg"
-wpath = "stain_custom_best.weights"
+# labelsPath = "/"
+labelsPath = "data/obj.names"
+cfgpath = "data/prior/yolov3-spp_custom.cfg"
+wpath = "data/yolov3-spp_custom_best.weights"
 Lables = get_labels(labelsPath)
 CFG = get_config(cfgpath)
 Weights = get_weights(wpath)
@@ -159,6 +184,30 @@ app = Flask(__name__)
 
 # route http posts to this method
 
+
+@app.route('/test_files', methods=['POST'])
+def test_files():
+    # load our input image and grab its spatial dimensions
+    #image = cv2.imread("./test1.jpg")
+    output = str(request.files["output"].read().decode("utf-8"))
+    
+    img = request.files["image"].read()
+    img = Image.open(io.BytesIO(img))
+    npimg = np.array(img)
+    image = npimg.copy()
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    res = get_predection(image, nets, Lables, Colors)
+    # image=cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
+    # show the output image
+    # cv2.imshow(request.files["output"].read(), image)
+    # cv2.waitKey()
+    # image = cv2.cvtColor(res, cv2.COLOR_BGR2RGB)
+    os.chdir('./test_results')
+    cv2.imwrite(str(output), image)
+    os.chdir('../')
+    np_img = Image.fromarray(image)
+    img_encoded = image_to_byte_array(np_img)
+    return Response(response=img_encoded, status=200, mimetype="image/jpeg")
 
 @app.route('/api/test', methods=['POST'])
 def main():
@@ -173,7 +222,7 @@ def main():
     res = get_predection(image, nets, Lables, Colors)
     # image=cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
     # show the output image
-    #cv2.imshow("Image", res)
+    # cv2.imshow(request.files["output"].read(), image)
     # cv2.waitKey()
     image = cv2.cvtColor(res, cv2.COLOR_BGR2RGB)
     np_img = Image.fromarray(image)
@@ -217,6 +266,7 @@ def gen():
         # img_encoded = image_to_byte_array(np_img)
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + open(pic_name, 'rb').read() + b'\r\n')
+        time.sleep(3)
         i+=1
         if img is None:
             print("Empty Frame")
@@ -227,8 +277,6 @@ def gen():
             else: 
                 break
         
-
-
 
     # start flask app
 if __name__ == '__main__':
