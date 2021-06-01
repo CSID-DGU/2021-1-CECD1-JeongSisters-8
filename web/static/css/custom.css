@@ -1,0 +1,28 @@
+/* your styles go here */
+.item-wrapper {
+    display: inline-block;
+    width: 300px;
+    height: auto;
+    position: relative;
+    margin: 0.5em;
+    padding: 0.5em 0.5em 80px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+  }
+  .item-image, .item-image img {
+    width: 100%;
+    position: relative;
+  }
+  .item-info-box {
+    position: absolute;
+    left: 0;
+    bottom: 0.75em;
+    width: 100%;
+    text-align: center;
+  }
+  .item-info {
+    display: inline-block;
+    background: #fff;
+    padding: 0 1em;
+  }

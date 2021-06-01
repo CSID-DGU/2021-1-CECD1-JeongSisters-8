@@ -114,5 +114,73 @@ def video_feed():
     return Response(gen(camera), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
+
+
+
+def gen(camera):
+    sess = tf.Session()
+
+    with sess.as_default():
+
+        while True:
+
+            success, img = camera.read()
+
+            if success:
+                    results = tfnet.return_predict(img)
+
+
+                    for result in results:
+                        #tl = (result["topleft"]['x'], result['topleft']['y'])
+                        #br = (result['bottomright']['x'], result['bottomright']['y'])
+                        label = result["label"]
+                        print(label)
+                        cv2.rectangle(img,
+                                    (result["topleft"]["x"], result["topleft"]["y"]),
+                                    (result["bottomright"]["x"], result["bottomright"]["y"]),
+                                    (255, 0, 0), 4)
+                        text_x, text_y = result["topleft"]["x"] - 10, result["topleft"]["y"] - 10
+                        cv2.putText(img, result["label"], (text_x, text_y), cv2.FONT_HERSHEY_SIMPLEX,
+                                    0.8, (0, 255, 0), 2, cv2.LINE_AA)
+                    cv2.imshow('frame',img)
+
+                    global tem_message
+                    tem_message = label
+                        
+                        # log 체크
+                    print("result: ", label, "| confidence: ", confidence)
+
+                    #cv2.imshow('frame',img)
+
+    
+                    ret, jpeg = cv2.imencode('.jpg', img)
+                    frame = jpeg.tobytes()
+
+                    yield (b'--frame\r\n'
+                           b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+            else:
+                print("Status of camera.read()\n", success, img, "\n=======================")
+
+@app.route('/video_feed')
+def video_feed():
+    cam = cv2.VideoCapture(0)
+    # cam.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+    # cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
+    #if cam.isOpened():
+    #    print('opended')
+    return Response(gen(cam),mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.route('/')
+def webcam():
+    return render_template('webcam.html')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=True)
+
+
+
+
+
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5001, debug=False, threaded=True)

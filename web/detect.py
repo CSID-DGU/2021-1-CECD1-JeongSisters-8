@@ -12,6 +12,7 @@ from io import BytesIO
 import io
 import json
 from PIL import Image
+from flask_bootstrap import Bootstrap
 
 # construct the argument parse and parse the arguments
 
@@ -126,9 +127,10 @@ def get_predection(image, net, LABELS, COLORS):
                             nmsthres)
 
     # ensure at least one detection exists
+    labels = []
     if len(idxs) > 0:
         # loop over the indexes we are keeping
-        for i in idxs.flatten():
+        for i in idxs.flatten(): #다차원 배열(array)을 1차원 배열로 평평하게 펴주는 함수
             # extract the bounding box coordinates
             (x, y) = (boxes[i][0], boxes[i][1]) #시작지점
             (w, h) = (boxes[i][2], boxes[i][3]) #가로 세로 길이
@@ -144,31 +146,42 @@ def get_predection(image, net, LABELS, COLORS):
             # else:
             #     h = math.ceil(h*1.5)
             # y *=2
-            
-            cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
-            text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
-            if LABELS[classIDs[i]] == 'stain':
-                #putText함수는 \n을 구분해내지 못하기 때문에 수동적으로 처리해야한다. 
-                stain_size = "\n{}*{} = {}".format(w,h,w*h)
-                # print(stain_size)
-                text += stain_size
-                print(text)
-            else:
-                # print(boxes)
-                print(LABELS[classIDs[i]],confidences[i])
-                # print(classIDs)
-                # print(confidences[i])
             # get dimensions of image
+            labels.append(LABELS[classIDs[i]])
             dimensions = image.shape
             
             # height, width, number of channels in image
             height = dimensions[0]
             width = dimensions[1]
+
+            if x<10 or y<10:
+                print(x,y)
+                y = 25
+            if height<h:
+                h = height-2*y
+            cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
+            
+            text = "{}: {:.1f}".format(LABELS[classIDs[i]], confidences[i])
+            if LABELS[classIDs[i]] == 'stain':
+                #putText함수는 \n을 구분해내지 못하기 때문에 수동적으로 처리해야한다. 
+                stain_size = w*h
+                # print(stain_size)
+                cv2.putText(image, str(stain_size), (x + w, y + h), #이미지, 출력문자, 출력위치
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, color,2) #폰트, 폰트크기, 색상, 두께
+                
+            else:
+                # print(boxes)
+                print(LABELS[classIDs[i]],confidences[i])
+                # print(classIDs)
+                # print(confidences[i])
+            
+            
             # channels = img.shape[2]
             # print(width,height)
             cv2.putText(image, text, (x, y-5), #이미지, 출력문자, 출력위치
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2) #폰트, 폰트크기, 색상, 두께
-    return image
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, color,2) #폰트, 폰트크기, 색상, 두께
+    print(labels)
+    return image,labels
 
 # labelsPath = "/"
 labelsPath = "data/obj.names"
@@ -181,10 +194,14 @@ nets = load_model(CFG, Weights)
 Colors = get_colors(Lables)
 # Initialize the Flask application
 app = Flask(__name__)
+# Bootstrap(app)
+
+
+# ajax 통신 변수
+tem_message = "temporary"
+final_message = "prediction result"
 
 # route http posts to this method
-
-
 @app.route('/test_files', methods=['POST'])
 def test_files():
     # load our input image and grab its spatial dimensions
@@ -196,7 +213,7 @@ def test_files():
     npimg = np.array(img)
     image = npimg.copy()
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    res = get_predection(image, nets, Lables, Colors)
+    res,labels = get_predection(image, nets, Lables, Colors)
     # image=cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
     # show the output image
     # cv2.imshow(request.files["output"].read(), image)
@@ -219,7 +236,7 @@ def main():
     npimg = np.array(img)
     image = npimg.copy()
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    res = get_predection(image, nets, Lables, Colors)
+    res,labels = get_predection(image, nets, Lables, Colors)
     # image=cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
     # show the output image
     # cv2.imshow(request.files["output"].read(), image)
@@ -232,7 +249,7 @@ def main():
 @app.route('/')
 def index():
     """Video streaming ."""
-    return render_template('index.html')
+    return render_template('index.html',resultReceived=sendResult())
 
 @app.route('/video_feed')
 def video_feed():
@@ -241,33 +258,31 @@ def video_feed():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 def gen():
+    global tem_message
     """Video streaming generator function."""
-    # while True:
-    #     rval, frame = vc.read()
-    #     cv2.imwrite('pic.jpg', frame)
-    #     yield (b'--frame\r\n'
-    #            b'Content-Type: image/jpeg\r\n\r\n' + open('pic.jpg', 'rb').read() + b'\r\n')
 
     vc = cv2.VideoCapture(0)
     count = 0
     i=0
     while True:
-        rval, img = vc.read()
+        success, img = vc.read()
         # cv2.imshow("webcam",frame)
         pic_name = 'pic{}.jpg'.format(i)
 
 
         image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        res = get_predection(image, nets, Lables, Colors)
+        res, labels = get_predection(image, nets, Lables, Colors)
         image = cv2.cvtColor(res, cv2.COLOR_BGR2RGB)
         cv2.imwrite(pic_name, image)
         cv2.imshow('output', image)
+        tem_message = ', '.join(labels)
         # np_img = Image.fromarray(image)
         # img_encoded = image_to_byte_array(np_img)
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + open(pic_name, 'rb').read() + b'\r\n')
         time.sleep(3)
         i+=1
+
         if img is None:
             print("Empty Frame")
             time.sleep(0.1)
@@ -277,7 +292,19 @@ def gen():
             else: 
                 break
         
+# ajax 통신 함수
+@app.route("/sendResult")
+def sendResult():
+    global tem_message, final_message
 
+    if tem_message == "temporary":
+        final_message = "no prediction yet"
+
+    else:
+        final_message = tem_message
+
+    return final_message
+    
     # start flask app
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
