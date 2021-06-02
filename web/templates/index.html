@@ -90,7 +90,7 @@
                       </div>
                     </div>
                     <div class="card-header d-flex align-items-center">
-                      <h3 class="h4">Striped table with hover effect</h3>
+                      <h3 class="h4">Summary of Detections</h3>
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
@@ -98,32 +98,100 @@
                           <thead>
                             <tr>
                               <th></th>
-                              <th>Clothes</th>
-                              <th>Stain</th>
-                              <th>Sum of Stains</th>
+                              <th>Cloth</th>
+                              <th>Number of Stains</th>
+                              <th>Total Area of Stains</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
                               <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
+                              <td>Jacket</td>
+                              <td>2</td>
+                              <td>150</td>
                             </tr>
                             <tr>
                               <th scope="row">2</th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>@fat</td>
+                              <td>Shirt</td>
+                              <td>3</td>
+                              <td>250</td>
                             </tr>
                             <tr>
                               <th scope="row">3</th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                              <td>@twitter </td>
+                              <td>Skirt</td>
+                              <td>0</td>
+                              <td>0</td>
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <button type="button" class="btn btn-primary" data-toggle="modal"
+                data-target=".bd-example-modal-xl">FINISH</button>
+              <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
+                aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenterTitle">👉Recommended Laundry Courses</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row bg-white has-shadow">
+                        <!-- Item1 -->
+                        <div class="col-xl-4 col-sm-6">
+                          <div class="item d-flex align-items-center">
+                            <div class="icon bg-violet"><i class="icon-user"></i></div>
+                            <div class="title"><span>Detergent</span>
+                              <!-- <div class="progress">
+                                <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
+                              </div> -->
+                            </div>
+                            <div class="number"><strong>중성세제 반컵 사용</strong></div>
+                          </div>
+                        </div>
+                        <!-- Item2 -->
+                        <div class="col-xl-4 col-sm-6">
+                          <div class="item d-flex align-items-center">
+                            <div class="icon bg-red"><i class="icon-padnote"></i></div>
+                            <div class="title"><span>Temperature</span>
+                              <!-- <div class="progress">
+                                <div role="progressbar" style="width: 70%; height: 4px;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
+                              </div> -->
+                            </div>
+                            <div class="number"><strong>30</strong></div>
+                          </div>
+                        </div>
+                        <!-- Item3 -->
+                        <div class="col-xl-4 col-sm-6">
+                          <div class="item d-flex align-items-center">
+                            <div class="icon bg-green"><i class="icon-bill"></i></div>
+                            <div class="title"><span>Wash Cycle</span>
+                              <!-- <div class="progress">
+                                <div role="progressbar" style="width: 40%; height: 4px;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
+                              </div> -->
+                            </div>
+                            <div class="number"><strong>헹굼 2회 + 탈수 중</strong></div>
+                          </div>
+                        </div>
+                        <!-- Item -->
+                        <!-- <div class="col-xl-3 col-sm-6">
+                          <div class="item d-flex align-items-center">
+                            <div class="icon bg-orange"><i class="icon-check"></i></div>
+                            <div class="title"><span>Open<br>Cases</span>
+                              <div class="progress">
+                                <div role="progressbar" style="width: 50%; height: 4px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
+                              </div>
+                            </div>
+                            <div class="number"><strong>50</strong></div>
+                          </div> -->
                       </div>
                     </div>
                   </div>
@@ -142,59 +210,7 @@
             <div class="row bg-white has-shadow">
               <div id="total"></div>
             </div>
-            <br>
-            <div class="row">
-              <h3> 👉 Custom laundry course </h3>
-            </div>
-            <div class="row bg-white has-shadow">
-              <!-- Item1 -->
-              <div class="col-xl-3 col-sm-6">
-                <div class="item d-flex align-items-center">
-                  <div class="icon bg-violet"><i class="icon-user"></i></div>
-                  <div class="title"><span>Detergent</span>
-                    <!-- <div class="progress">
-                        <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
-                      </div> -->
-                  </div>
-                  <div class="number"><strong>중성세제 반컵 사용</strong></div>
-                </div>
-              </div>
-              <!-- Item2 -->
-              <div class="col-xl-3 col-sm-6">
-                <div class="item d-flex align-items-center">
-                  <div class="icon bg-red"><i class="icon-padnote"></i></div>
-                  <div class="title"><span>Temperature</span>
-                    <!-- <div class="progress">
-                        <div role="progressbar" style="width: 70%; height: 4px;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
-                      </div> -->
-                  </div>
-                  <div class="number"><strong>30</strong></div>
-                </div>
-              </div>
-              <!-- Item3 -->
-              <div class="col-xl-3 col-sm-6">
-                <div class="item d-flex align-items-center">
-                  <div class="icon bg-green"><i class="icon-bill"></i></div>
-                  <div class="title"><span>Wash Cycle</span>
-                    <!-- <div class="progress">
-                        <div role="progressbar" style="width: 40%; height: 4px;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
-                      </div> -->
-                  </div>
-                  <div class="number"><strong>헹굼 2회 + 탈수 중</strong></div>
-                </div>
-              </div>
-              <!-- Item -->
-              <!-- <div class="col-xl-3 col-sm-6">
-                  <div class="item d-flex align-items-center">
-                    <div class="icon bg-orange"><i class="icon-check"></i></div>
-                    <div class="title"><span>Open<br>Cases</span>
-                      <div class="progress">
-                        <div role="progressbar" style="width: 50%; height: 4px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
-                      </div>
-                    </div>
-                    <div class="number"><strong>50</strong></div>
-                  </div> -->
-            </div>
+
           </div>
       </div>
       </section>
