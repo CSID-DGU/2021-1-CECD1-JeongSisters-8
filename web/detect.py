@@ -1,4 +1,5 @@
 import numpy as np
+from collections import Counter
 import argparse
 import time, math
 import cv2
@@ -170,6 +171,8 @@ def get_predection(image, net, LABELS, COLORS):
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, color,2) #폰트, 폰트크기, 색상, 두께
                 
             else:
+                if LABELS[classIDs[i]] != 'Button': #옷 종류들을 담는다. 
+                    global_clothes.append(LABELS[classIDs[i]])
                 # print(boxes)
                 print(LABELS[classIDs[i]],confidences[i])
                 # print(classIDs)
@@ -200,7 +203,9 @@ app = Flask(__name__)
 # ajax 통신 변수
 tem_message = "temporary"
 final_message = "prediction result"
-
+global_clothes = []
+global_stains = [] 
+const_sec = 30
 # route http posts to this method
 @app.route('/test_files', methods=['POST'])
 def test_files():
@@ -253,36 +258,42 @@ def index():
 
 @app.route('/video_feed')
 def video_feed():
+    camera = cv2.VideoCapture(0)
     """Video streaming route. Put this in the src attribute of an img tag."""
-    return Response(gen(),
+    return Response(gen(camera),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
-def gen():
+def gen(camera):
     global tem_message
     """Video streaming generator function."""
+    if not camera.isOpened():
+        raise RuntimeError("Could not start camera")
 
-    vc = cv2.VideoCapture(0)
+    # vc = cv2.VideoCapture(0)
     count = 0
     i=0
-    while True:
-        success, img = vc.read()
+    second = 60#15초
+    while second >= 0:
+        success, img = camera.read()
         # cv2.imshow("webcam",frame)
+        # if success:
         pic_name = 'pic{}.jpg'.format(i)
-
-
         image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         res, labels = get_predection(image, nets, Lables, Colors)
         image = cv2.cvtColor(res, cv2.COLOR_BGR2RGB)
-        cv2.imwrite(pic_name, image)
-        cv2.imshow('output', image)
+        # if second%const_sec==0: #1초마다 한 번씩
+        cv2.imwrite(pic_name, image) #변환된 이미지나 동영상의 특정 프레임을 저장
+        # cv2.imshow('output', image) #읽어들인 이미지 파일을 윈도우창에 보여줌
         tem_message = ', '.join(labels)
         # np_img = Image.fromarray(image)
         # img_encoded = image_to_byte_array(np_img)
+        '''imwrite랑 yield가 같이 있어야 화면에서 보임.'''
         yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + open(pic_name, 'rb').read() + b'\r\n')
-        time.sleep(3)
+            b'Content-Type: image/jpeg\r\n\r\n' + open(pic_name, 'rb').read() + b'\r\n')
+        # time.sleep(3)
         i+=1
-
+        second -=1 
+        
         if img is None:
             print("Empty Frame")
             time.sleep(0.1)
@@ -291,6 +302,8 @@ def gen():
                 continue
             else: 
                 break
+    print("global clothes")
+    print(global_clothes)
         
 # ajax 통신 함수
 @app.route("/sendResult")
@@ -304,7 +317,36 @@ def sendResult():
         final_message = tem_message
 
     return final_message
+
+@app.route("/totalResult")
+def totalResult():
+    global global_clothes
+    if not global_clothes:
+        final_clothes = "?"
+
+    else:
+        clothes = Counter(global_clothes)
+        final_clothes = clothes.most_common()[0][0]
+
+    return final_clothes
+@app.route('/test')
+def test():
+    """Video streaming ."""
+    return render_template('test.html')
+
+@app.route('/totalResult2')
+def totalResult2():
+    global global_clothes
+    summaries = {
+    "clothes": "Shirt",
+    "Stain": 3,
+    "area": "150"
+    }
     
+    str2 = jsonify(summaries)
+
+    return str2
+
     # start flask app
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
