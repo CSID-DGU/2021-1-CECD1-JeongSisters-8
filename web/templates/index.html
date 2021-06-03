@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
   <!-- Favicon-->
   <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+  <!-- <link rel="stylesheet"
+href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> -->
   <!-- Tweaks for older IEs-->
   <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -78,7 +80,15 @@
                 </div>
               </div>
               <div class="chart col-lg-4 col-12">
-                <div class="bd-post-thumbnail mt-2 mb-4">
+
+                <div class="row">
+                  <h3> 👉 This is  </h3>
+                </div>
+                <div class="row bg-white has-shadow" style="margin-bottom: 50px;font-weight: bold;margin-bottom: 50px;font-size: 1.5em;">
+                  <div id="total"></div>
+                </div>
+
+                <div class="bd-post-thumbnail mt-2 mb-4" style="margin-bottom: 50px;font-size:1.5em;">
                   <div class="card">
                     <div class="card-close">
                       <div class="dropdown">
@@ -128,61 +138,60 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="row">
-              <button type="button" class="btn btn-primary" data-toggle="modal"
-                data-target=".bd-example-modal-xl">FINISH</button>
-              <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
-                aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalCenterTitle">👉Recommended Laundry Courses</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="row bg-white has-shadow">
-                        <!-- Item1 -->
-                        <div class="col-xl-4 col-sm-6">
-                          <div class="item d-flex align-items-center">
-                            <div class="icon bg-violet"><i class="icon-user"></i></div>
-                            <div class="title"><span>Detergent</span>
-                              <!-- <div class="progress">
+
+                <div style="margin-bottom: 50px;">
+                  <button type="button" class="btn btn-primary btn-lg text-right" data-toggle="modal"
+                    data-target=".bd-example-modal-xl"style="float:right;font-size:1.5em;">FINISH</button>
+                  <div id="exampleModalCenter" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
+                    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalCenterTitle">👉Recommended Laundry Courses</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row bg-white has-shadow">
+                            <!-- Item1 -->
+                            <div class="col-xl-4 col-sm-6">
+                              <div class="item d-flex align-items-center">
+                                <div class="icon bg-violet"><i class="icon-user"></i></div>
+                                <div class="title"><span>Detergent</span>
+                                  <!-- <div class="progress">
                                 <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
                               </div> -->
+                                </div>
+                                <div class="number"><strong>중성세제 반컵 사용</strong></div>
+                              </div>
                             </div>
-                            <div class="number"><strong>중성세제 반컵 사용</strong></div>
-                          </div>
-                        </div>
-                        <!-- Item2 -->
-                        <div class="col-xl-4 col-sm-6">
-                          <div class="item d-flex align-items-center">
-                            <div class="icon bg-red"><i class="icon-padnote"></i></div>
-                            <div class="title"><span>Temperature</span>
-                              <!-- <div class="progress">
+                            <!-- Item2 -->
+                            <div class="col-xl-4 col-sm-6">
+                              <div class="item d-flex align-items-center">
+                                <div class="icon bg-red"><i class="icon-padnote"></i></div>
+                                <div class="title"><span>Temperature</span>
+                                  <!-- <div class="progress">
                                 <div role="progressbar" style="width: 70%; height: 4px;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
                               </div> -->
+                                </div>
+                                <div class="number"><strong>30</strong></div>
+                              </div>
                             </div>
-                            <div class="number"><strong>30</strong></div>
-                          </div>
-                        </div>
-                        <!-- Item3 -->
-                        <div class="col-xl-4 col-sm-6">
-                          <div class="item d-flex align-items-center">
-                            <div class="icon bg-green"><i class="icon-bill"></i></div>
-                            <div class="title"><span>Wash Cycle</span>
-                              <!-- <div class="progress">
+                            <!-- Item3 -->
+                            <div class="col-xl-4 col-sm-6">
+                              <div class="item d-flex align-items-center">
+                                <div class="icon bg-green"><i class="icon-bill"></i></div>
+                                <div class="title"><span>Wash Cycle</span>
+                                  <!-- <div class="progress">
                                 <div role="progressbar" style="width: 40%; height: 4px;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
                               </div> -->
+                                </div>
+                                <div class="number"><strong>헹굼 2회 + 탈수 중</strong></div>
+                              </div>
                             </div>
-                            <div class="number"><strong>헹굼 2회 + 탈수 중</strong></div>
-                          </div>
-                        </div>
-                        <!-- Item -->
-                        <!-- <div class="col-xl-3 col-sm-6">
+                            <!-- Item -->
+                            <!-- <div class="col-xl-3 col-sm-6">
                           <div class="item d-flex align-items-center">
                             <div class="icon bg-orange"><i class="icon-check"></i></div>
                             <div class="title"><span>Open<br>Cases</span>
@@ -192,24 +201,20 @@
                             </div>
                             <div class="number"><strong>50</strong></div>
                           </div> -->
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+
+
               </div>
             </div>
-            <div class="row">
-              <h3> 👉 Predict Result </h3>
-            </div>
-            <div class="row bg-white has-shadow">
-              <div id="resultReceived"></div>
-            </div>
-            <div class="row">
-              <h3> 👉 This is </h3>
-            </div>
-            <div class="row bg-white has-shadow">
-              <div id="total"></div>
-            </div>
+
+
+
+
 
           </div>
       </div>
