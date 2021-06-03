@@ -1,5 +1,5 @@
 import numpy as np
-from collections import Counter
+from collections import Counter, namedtuple
 import argparse
 import time, math
 import cv2
@@ -75,13 +75,13 @@ def get_predection(image, net, LABELS, COLORS):
     blob = cv2.dnn.blobFromImage(image, 1 / 255.0, (416, 416),
                                  swapRB=True, crop=False)
     net.setInput(blob)
-    start = time.time()
+    # start = time.time()
     layerOutputs = net.forward(ln)
     # print(layerOutputs)
-    end = time.time()
+    # end = time.time()
 
     # show timing information on YOLO
-    print("[INFO] YOLO took {:.6f} seconds".format(end - start))
+    # print("[INFO] YOLO took {:.6f} seconds".format(end - start))
 
     # initialize our lists of detected bounding boxes, confidences, and
     # class IDs, respectively
@@ -129,6 +129,8 @@ def get_predection(image, net, LABELS, COLORS):
 
     # ensure at least one detection exists
     labels = []
+    stain_cnt = 0 #한 프레임 내에 존재하는 stain 갯수
+    stain_area = 0
     if len(idxs) > 0:
         # loop over the indexes we are keeping
         for i in idxs.flatten(): #다차원 배열(array)을 1차원 배열로 평평하게 펴주는 함수
@@ -167,12 +169,14 @@ def get_predection(image, net, LABELS, COLORS):
                 #putText함수는 \n을 구분해내지 못하기 때문에 수동적으로 처리해야한다. 
                 stain_size = w*h
                 # print(stain_size)
+                stain_cnt += 1 
+                stain_area += stain_size
                 cv2.putText(image, str(stain_size), (x + w, y + h), #이미지, 출력문자, 출력위치
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, color,2) #폰트, 폰트크기, 색상, 두께
                 
             else:
                 if LABELS[classIDs[i]] != 'Button': #옷 종류들을 담는다. 
-                    global_clothes.append(LABELS[classIDs[i]])
+                    cloth_labels_per_laundry.append(LABELS[classIDs[i]])
                 # print(boxes)
                 print(LABELS[classIDs[i]],confidences[i])
                 # print(classIDs)
@@ -183,7 +187,10 @@ def get_predection(image, net, LABELS, COLORS):
             # print(width,height)
             cv2.putText(image, text, (x, y-5), #이미지, 출력문자, 출력위치
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, color,2) #폰트, 폰트크기, 색상, 두께
-    print(labels)
+    
+    stain_cnt_per_laundry.append(stain_cnt)
+    stain_area_per_laundry.append(stain_area)
+    print(labels, stain_cnt_per_laundry,stain_area_per_laundry)
     return image,labels
 
 # labelsPath = "/"
@@ -199,13 +206,178 @@ Colors = get_colors(Lables)
 app = Flask(__name__)
 # Bootstrap(app)
 
+'''
+1. 
+한 프레임에 대한 라벨들 -> labels(local)
+한 프레임에 대한 stain 갯수-> stain_cnt(local)
+한 프레임에 대한 stain 면적 합-> stain_area(local)
+다음 프레임 진행하기 전에 초기화 
+
+2.
+한 세탁물에 대해 검출된 옷 라벨들 -> cloth_labels_per_laundry(global 배열)
+한 세탁물에 대해 검출된 오염 갯수들 -> stain_cnt_per_laundry(global 배열)
+한 세탁물에 대해 검출된 오염 면적 합 -> stain_area_per_laundry(global 배열)
+다음 세탁물 진행하기 전에 초기화(x초 지나면)
+
+3.
+한 세탁물의 옷 라벨인 clothes중 최다 등장한 것을 그 옷이라고 판단. predicted_cloth_label(local)
+한 세탁물의 stain 갯수 predicted_stain_cnt(local)
+한 세탁물의 stain 면적 predicted_stain_area(local)
+
+
+summary 객체 = [predicted_cloth_label, predicted_stain_cnt, predicted_stain_area]
+전체실행 중 각 세탁물들의 {옷 종류, stain 갯수, stain 면적}객체를 담는 배열-> detec_summaries(global). append(summary)
+
+
+'''
 
 # ajax 통신 변수
 tem_message = "temporary"
 final_message = "prediction result"
-global_clothes = []
-global_stains = [] 
+cloth_labels_per_laundry = []
+stain_cnt_per_laundry = [] 
+stain_area_per_laundry = [] 
+summary = []
+summaries = []
+Summary= namedtuple("Summary", 'cloth, stain_cnt, stain_area')
 const_sec = 30
+STOP = False
+SECOND = 20 #5초
+@app.route('/')
+def index():
+    """Video streaming ."""
+    return render_template('index.html',resultReceived=sendResult())
+
+@app.route('/video_feed')
+def video_feed():
+    camera = cv2.VideoCapture(0)
+    """Video streaming route. Put this in the src attribute of an img tag."""
+    return Response(gen(camera),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
+
+def gen(camera):
+    global tem_message
+    global cloth_labels_per_laundry,stain_cnt_per_laundry, stain_area_per_laundry
+    """Video streaming generator function."""
+    if not camera.isOpened():
+        raise RuntimeError("Could not start camera")
+
+    # vc = cv2.VideoCapture(0)
+    count = 0
+    i=0
+    second = SECOND
+    start = time.time()
+    while not STOP:
+        success, img = camera.read()
+        # cv2.imshow("webcam",frame)
+        # if success:
+        pic_name = 'pic{}.jpg'.format(second)
+        image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        res, labels = get_predection(image, nets, Lables, Colors)
+        image = cv2.cvtColor(res, cv2.COLOR_BGR2RGB)
+        # if second%const_sec==0: #1초마다 한 번씩
+        cv2.imwrite(pic_name, image) #변환된 이미지나 동영상의 특정 프레임을 저장
+        # cv2.imshow('output', image) #읽어들인 이미지 파일을 윈도우창에 보여줌
+        tem_message = ', '.join(labels)
+        # np_img = Image.fromarray(image)
+        # img_encoded = image_to_byte_array(np_img)
+        '''imwrite랑 yield가 같이 있어야 화면에서 보임.'''
+        yield (b'--frame\r\n'
+            b'Content-Type: image/jpeg\r\n\r\n' + open(pic_name, 'rb').read() + b'\r\n')
+        # time.sleep(3)
+        i+=1
+        second -=1 
+        
+        if second == 0:
+            print("global clothes")
+            print(cloth_labels_per_laundry,stain_cnt_per_laundry,stain_area_per_laundry)
+            cloth_labels_per_laundry=[] #15초마다 한 번씩 reset
+            stain_cnt_per_laundry =[]
+            stain_area_per_laundry=[]
+            print("summary")
+            print(summary)
+            # print("[INFO] YOLO took {:.6f} seconds".format(time.time() - start))
+            second = SECOND
+
+        if img is None:
+            print("Empty Frame")
+            time.sleep(0.1)
+            count+=1
+            if count < 3:
+                continue
+            else: 
+                break
+    
+
+        
+# ajax 통신 함수
+@app.route("/sendResult")
+def sendResult():
+    global tem_message, final_message
+
+    if tem_message == "temporary":
+        final_message = "no prediction yet"
+
+    else:
+        final_message = tem_message
+
+    return final_message
+
+@app.route("/totalResult")
+def totalResult():
+    #세탁물의 옷 종류를 예측하기. 
+    global cloth_labels_per_laundry
+    if not cloth_labels_per_laundry:
+        predicted_cloth_label = " Nothing Detected "
+
+    else:
+        clothes = Counter(cloth_labels_per_laundry)
+        predicted_cloth_label = clothes.most_common()[0][0] #여러 결과 중에 가장 빈도 수가 높게 나타난 옷
+
+        stain_cnt = Counter(stain_cnt_per_laundry)
+        predicted_stain_cnt = stain_cnt.most_common()[0][0]
+
+        stain_area = Counter(stain_area_per_laundry)
+        predicted_stain_area = stain_area.most_common()[0][0]
+        summaries.append(
+            {'cloth':predicted_cloth_label,'stain_cnt':predicted_stain_cnt, 'stain_area':predicted_stain_area}
+        )
+        # s = Summary(predicted_cloth_label, predicted_stain_cnt, predicted_stain_area)
+        print('here')
+        print(summaries)
+        summary.append(predicted_cloth_label) #예측기록에 추가 
+
+    return predicted_cloth_label
+
+@app.route("/change_stop_flag")
+def change_stop_flag():
+    global STOP
+    STOP = True
+    return jsonify(STOP)
+
+@app.route('/test')
+def test():
+    """Video streaming ."""
+    return render_template('test.html')
+
+@app.route('/redrawTable')
+def redrawTable():
+    return jsonify(summaries)
+
+@app.route('/totalResult2')
+def totalResult2():
+    global cloth_labels_per_laundry
+    summaries =[
+        {'cloth':'12', 
+        'stain_cnt':21,'stain_area':12}
+    ]
+    summaries.append(  {'cloth':'qwqwq', 
+        'stain_cnt':21,'stain_area':12})
+    # summaries = [
+    #     Summary(cloth='Jhon', stain_cnt=28, stain_area='남'), Summary(cloth='Ciln', stain_cnt=24, stain_area='여')
+    # ]
+    return jsonify(summaries)
+
 # route http posts to this method
 @app.route('/test_files', methods=['POST'])
 def test_files():
@@ -251,101 +423,8 @@ def main():
     img_encoded = image_to_byte_array(np_img)
     return Response(response=img_encoded, status=200, mimetype="image/jpeg")
 
-@app.route('/')
-def index():
-    """Video streaming ."""
-    return render_template('index.html',resultReceived=sendResult())
 
-@app.route('/video_feed')
-def video_feed():
-    camera = cv2.VideoCapture(0)
-    """Video streaming route. Put this in the src attribute of an img tag."""
-    return Response(gen(camera),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
 
-def gen(camera):
-    global tem_message
-    """Video streaming generator function."""
-    if not camera.isOpened():
-        raise RuntimeError("Could not start camera")
-
-    # vc = cv2.VideoCapture(0)
-    count = 0
-    i=0
-    second = 60#15초
-    while second >= 0:
-        success, img = camera.read()
-        # cv2.imshow("webcam",frame)
-        # if success:
-        pic_name = 'pic{}.jpg'.format(i)
-        image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        res, labels = get_predection(image, nets, Lables, Colors)
-        image = cv2.cvtColor(res, cv2.COLOR_BGR2RGB)
-        # if second%const_sec==0: #1초마다 한 번씩
-        cv2.imwrite(pic_name, image) #변환된 이미지나 동영상의 특정 프레임을 저장
-        # cv2.imshow('output', image) #읽어들인 이미지 파일을 윈도우창에 보여줌
-        tem_message = ', '.join(labels)
-        # np_img = Image.fromarray(image)
-        # img_encoded = image_to_byte_array(np_img)
-        '''imwrite랑 yield가 같이 있어야 화면에서 보임.'''
-        yield (b'--frame\r\n'
-            b'Content-Type: image/jpeg\r\n\r\n' + open(pic_name, 'rb').read() + b'\r\n')
-        # time.sleep(3)
-        i+=1
-        second -=1 
-        
-        if img is None:
-            print("Empty Frame")
-            time.sleep(0.1)
-            count+=1
-            if count < 3:
-                continue
-            else: 
-                break
-    print("global clothes")
-    print(global_clothes)
-        
-# ajax 통신 함수
-@app.route("/sendResult")
-def sendResult():
-    global tem_message, final_message
-
-    if tem_message == "temporary":
-        final_message = "no prediction yet"
-
-    else:
-        final_message = tem_message
-
-    return final_message
-
-@app.route("/totalResult")
-def totalResult():
-    global global_clothes
-    if not global_clothes:
-        final_clothes = "?"
-
-    else:
-        clothes = Counter(global_clothes)
-        final_clothes = clothes.most_common()[0][0]
-
-    return final_clothes
-@app.route('/test')
-def test():
-    """Video streaming ."""
-    return render_template('test.html')
-
-@app.route('/totalResult2')
-def totalResult2():
-    global global_clothes
-    summaries = {
-    "clothes": "Shirt",
-    "Stain": 3,
-    "area": "150"
-    }
-    
-    str2 = jsonify(summaries)
-
-    return str2
 
     # start flask app
 if __name__ == '__main__':

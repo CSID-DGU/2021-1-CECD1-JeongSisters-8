@@ -8,6 +8,10 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="robots" content="all,follow">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
   <!-- Bootstrap CSS-->
   <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
   <!-- Font Awesome CSS-->
@@ -92,7 +96,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
                   <div class="card">
                     <div class="card-close">
                       <div class="dropdown">
-                        <button type="button" id="closeCard3" data-toggle="dropdown" aria-haspopup="true"
+                        <button type="button" id="closeCard3" data-toggle="dropdown" aria-haspopup="true" 
                           aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
                         <div aria-labelledby="closeCard3" class="dropdown-menu dropdown-menu-right has-shadow"><a
                             href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#"
@@ -123,7 +127,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
                             <tr>
                               <th scope="row">2</th>
                               <td>Shirt</td>
-                              <td>3</td>
+                              <td>2</td>
                               <td>250</td>
                             </tr>
                             <tr>
@@ -140,7 +144,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
                 </div>
 
                 <div style="margin-bottom: 50px;">
-                  <button type="button" class="btn btn-primary btn-lg text-right" data-toggle="modal"
+                  <button id ="stopButton" type="button" class="btn btn-primary btn-lg text-right" data-toggle="modal"
                     data-target=".bd-example-modal-xl"style="float:right;font-size:1.5em;">FINISH</button>
                   <div id="exampleModalCenter" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
                     aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -238,14 +242,49 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
   <script>
 
     $(document).ready(function () {
+     
+      // while (!flag) {
+        
+      // }
       setInterval("ajaxd()", 1000); // call every 1 seconds
-      setInterval("get()", 16000);
+        setInterval("get()", 5000);
+        // setInterval("redrawTable()", 5000);
+      
     });
 
     function ajaxd() {
       // reload result into element with id "resultReceived"
       $("#resultReceived").load("/sendResult")
     }
+    function redrawTable(){
+      $.ajax({
+                'url': '/redrawTable',
+                'method': "GET",
+                'contentType': 'application/json'
+            }).done(function (data) {
+                $('#summary').dataTable({
+                    "paging": false,
+                    "searching": false,
+                    "aaData": data,
+                    "columns": [
+                        { "data": "cloth" },
+                        { "data": "stain_cnt" },
+                        { "data": "stain_area" }
+                    ]
+                })
+            })
+    }
+    $('#stopButton').click(function(){
+      $.ajax({
+        url : '/change_stop_flag',
+        type : 'GET', 
+        success: function(data){
+          console.log(data)
+          // flag = true
+        }
+      });
+    });
+
     function get() {
       $("#total").load("/totalResult")
     }
