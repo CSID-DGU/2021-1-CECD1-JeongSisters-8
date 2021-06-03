@@ -313,7 +313,11 @@ input {
 }
 
 .page {
-  background: #EEF5F9;
+  /* background: #EEF5F9; */
+  background-image: url("background/back_blue_center.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 100%;
 }
 
 .page .text-white {
