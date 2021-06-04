@@ -89,7 +89,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
                   <h3> 👉 This is  </h3>
                 </div>
                 <div class="row bg-white has-shadow" style="margin-bottom: 50px;font-weight: bold;margin-bottom: 50px;font-size: 1.5em;">
-                  <div id="total"></div>
+                  <div id="predicted_result"></div>
                 </div>
 
                 <div class="bd-post-thumbnail mt-2 mb-4" style="margin-bottom: 50px;font-size:1.5em;">
@@ -108,16 +108,16 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
-                        <table class="table table-striped table-hover">
+                        <table id="summary" class="table table-striped table-hover" style="font-size:x-large">
                           <thead>
                             <tr>
-                              <th></th>
+                             
                               <th>Cloth</th>
                               <th>Number of Stains</th>
                               <th>Total Area of Stains</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <!-- <tbody>
                             <tr>
                               <th scope="row">1</th>
                               <td>Jacket</td>
@@ -136,7 +136,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
                               <td>0</td>
                               <td>0</td>
                             </tr>
-                          </tbody>
+                          </tbody> -->
                         </table>
                       </div>
                     </div>
@@ -239,6 +239,8 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
   <!-- Main File-->
   <script src="{{ url_for('static', filename='js/front.js') }}"></script>
   <script src="{{ url_for('static', filename='js/aiwasher-custom.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
   <script>
 
     $(document).ready(function () {
@@ -246,16 +248,22 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
       // while (!flag) {
         
       // }
-      setInterval("ajaxd()", 1000); // call every 1 seconds
-        setInterval("get()", 5000);
+      // setInterval("ajaxd()", 1000); // call every 1 seconds
+      getResult = setInterval("get_predicted_result()", 9000);
         // setInterval("redrawTable()", 5000);
       
     });
 
-    function ajaxd() {
-      // reload result into element with id "resultReceived"
-      $("#resultReceived").load("/sendResult")
+    // function ajaxd() {
+    //   // reload result into element with id "resultReceived"
+    //   $("#resultReceived").load("/sendResult")
+    // }
+    function get_predicted_result() {
+      $("#predicted_result").load("/predicted_result",function(){
+        redrawTable();
+      });  //result를 가져오고 그 다음에 테이블을 그려줘야함. 
     }
+
     function redrawTable(){
       $.ajax({
                 'url': '/redrawTable',
@@ -265,6 +273,8 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
                 $('#summary').dataTable({
                     "paging": false,
                     "searching": false,
+                    "info": false,
+                    "destroy": true,
                     "aaData": data,
                     "columns": [
                         { "data": "cloth" },
@@ -279,15 +289,13 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
         url : '/change_stop_flag',
         type : 'GET', 
         success: function(data){
-          console.log(data)
-          // flag = true
+          console.log(data);
+          clearInterval(getResult); //finish버튼을 누르면 result 그만 가져옴
         }
       });
     });
 
-    function get() {
-      $("#total").load("/totalResult")
-    }
+  
   </script>
 </body>
 

@@ -239,10 +239,12 @@ stain_cnt_per_laundry = []
 stain_area_per_laundry = [] 
 summary = []
 summaries = []
-Summary= namedtuple("Summary", 'cloth, stain_cnt, stain_area')
+# Summary= namedtuple("Summary", 'cloth, stain_cnt, stain_area')
 const_sec = 30
 STOP = False
-SECOND = 20 #5초
+SECOND = 20 #5초(8초??)
+
+
 @app.route('/')
 def index():
     """Video streaming ."""
@@ -296,7 +298,7 @@ def gen(camera):
             stain_area_per_laundry=[]
             print("summary")
             print(summary)
-            # print("[INFO] YOLO took {:.6f} seconds".format(time.time() - start))
+            print("[INFO] YOLO took {:.6f} seconds".format(time.time() - start))
             second = SECOND
 
         if img is None:
@@ -307,23 +309,8 @@ def gen(camera):
                 continue
             else: 
                 break
-    
 
-        
-# ajax 통신 함수
-@app.route("/sendResult")
-def sendResult():
-    global tem_message, final_message
-
-    if tem_message == "temporary":
-        final_message = "no prediction yet"
-
-    else:
-        final_message = tem_message
-
-    return final_message
-
-@app.route("/totalResult")
+@app.route("/predicted_result")
 def totalResult():
     #세탁물의 옷 종류를 예측하기. 
     global cloth_labels_per_laundry
@@ -355,14 +342,17 @@ def change_stop_flag():
     STOP = True
     return jsonify(STOP)
 
+@app.route('/redrawTable')
+def redrawTable():
+    return jsonify(summaries)
+
+'''
+아래는 TEST CODES 
+'''
 @app.route('/test')
 def test():
     """Video streaming ."""
     return render_template('test.html')
-
-@app.route('/redrawTable')
-def redrawTable():
-    return jsonify(summaries)
 
 @app.route('/totalResult2')
 def totalResult2():
@@ -377,6 +367,19 @@ def totalResult2():
     #     Summary(cloth='Jhon', stain_cnt=28, stain_area='남'), Summary(cloth='Ciln', stain_cnt=24, stain_area='여')
     # ]
     return jsonify(summaries)
+
+# ajax 통신 함수
+@app.route("/sendResult")
+def sendResult():
+    global tem_message, final_message
+
+    if tem_message == "temporary":
+        final_message = "no prediction yet"
+
+    else:
+        final_message = tem_message
+
+    return final_message
 
 # route http posts to this method
 @app.route('/test_files', methods=['POST'])
