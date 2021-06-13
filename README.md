@@ -17,7 +17,6 @@
 ### 1. Darknet
 * [AlexeyAB/darknet](https://github.com/AlexeyAB/darknet) 
   * mAP, loss, iteration 등을 추적하면서 연구하기 편해서 사용했다. 
-<br>
 
 ### 2. Dataset
 * [Google Open Images Dataset V6(Clothes, Button data)](https://storage.googleapis.com/openimages/web/index.html)
