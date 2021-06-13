@@ -3,7 +3,6 @@
 ### 2021-1 Capstone Design2
 
 > 2021.03 - 2021.06  
-> :star: YOLOv3
 
 <br> 
 
@@ -23,9 +22,11 @@
 * [Tilda Textile Texture-Database(Stain data)](https://lmb.informatik.uni-freiburg.de/resources/datasets/tilda.en.html)
 * [Kaggle(Stain data)](https://www.kaggle.com/priemshpathirana/fabric-stain-dataset)
 * Google Image(Stain, Button data)
-<br>  
-* [Yolo Mark](https://github.com/AlexeyAB/Yolo_mark)  
-> Marking bounded boxes of objects in images for training Yolo v3  
+<br>
+
+* [Yolo Mark](https://github.com/AlexeyAB/Yolo_mark)
+  
+> Marking bounded boxes of objects in images for training Yolo v3   
 <br>
 
 ### 3. Config
