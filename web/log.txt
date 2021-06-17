@@ -1,0 +1,628 @@
+INFO] loading YOLO from disk...
+ * Debugger is active!
+ * Debugger PIN: 184-876-427
+127.0.0.1 - - [04/Jun/2021 03:00:15] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2021 03:00:16] "GET /static/vendor/bootstrap/css/bootstrap.min.css HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2021 03:00:16] "GET /static/vendor/chart.js/Chart.min.js HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2021 03:00:18] "GET /sendResult HTTP/1.1" 200 -
+127.0.0.1 - - [04/Jun/2021 03:00:18] "GET /totalResult HTTP/1.1" 200 -
+[INFO] YOLO took 0.527558 seconds
+[]
+127.0.0.1 - - [04/Jun/2021 03:00:19] "GET /video_feed HTTP/1.1" 200 -
+[INFO] YOLO took 0.280440 seconds
+92 -119
+Shirt 0.611198365688324
+['Shirt']
+[INFO] YOLO took 0.296733 seconds
+101 -121
+Shirt 0.5086230635643005
+['Shirt']
+[INFO] YOLO took 0.259501 seconds
+94 -134
+Shirt 0.6099309325218201
+['Shirt']
+[INFO] YOLO took 0.265027 seconds
+80 -131
+Shirt 0.4975321888923645
+['Shirt', 'stain']
+[INFO] YOLO took 0.275589 seconds
+107 -124
+Shirt 0.6114059686660767
+['stain', 'Shirt', 'stain']
+[INFO] YOLO took 0.268857 seconds
+98 -112
+Shirt 0.9857460260391235
+['Shirt', 'stain', 'stain']
+[INFO] YOLO took 0.246771 seconds
+80 -107
+Shirt 0.9829389452934265
+['Shirt', 'stain']
+[INFO] YOLO took 0.258287 seconds
+84 -114
+Shirt 0.9895546436309814
+['Shirt', 'stain', 'stain']
+[INFO] YOLO took 0.256989 seconds
+78 -108
+Shirt 0.9047160148620605
+Button 0.5680134296417236
+['Shirt', 'stain', 'Button', 'stain']
+[INFO] YOLO took 0.247514 seconds
+82 -111
+Shirt 0.8596916794776917
+Button 0.3794150650501251
+['stain', 'Shirt', 'Button']
+[INFO] YOLO took 0.267353 seconds
+80 -105
+Shirt 0.945779025554657
+Button 0.4300673007965088
+['Shirt', 'stain', 'stain', 'Button']
+[INFO] YOLO took 0.249926 seconds
+87 -98
+Shirt 0.8720514178276062
+['Shirt', 'stain']
+[INFO] YOLO took 0.245472 seconds
+84 -102
+Shirt 0.9025561809539795
+['Shirt', 'stain', 'stain']
+[INFO] YOLO took 0.280406 seconds
+85 -104
+Shirt 0.8579607605934143
+Button 0.20433875918388367
+['Shirt', 'stain', 'stain', 'Button']
+[INFO] YOLO took 0.252163 seconds
+85 -99
+Shirt 0.86693274974823
+Button 0.26930341124534607
+['Shirt', 'stain', 'stain', 'Button']
+[INFO] YOLO took 0.252404 seconds
+83 -94
+Shirt 0.8508709669113159
+['Shirt', 'stain']
+[INFO] YOLO took 0.250917 seconds
+82 -103
+Shirt 0.9061632752418518
+['Shirt', 'stain']
+[INFO] YOLO took 0.256886 seconds
+84 -98
+Shirt 0.8534992337226868
+['stain', 'Shirt']
+[INFO] YOLO took 0.255087 seconds
+83 -96
+Shirt 0.8509795069694519
+['stain', 'Shirt']
+[INFO] YOLO took 0.250470 seconds
+80 -100
+Shirt 0.9279716610908508
+['Shirt', 'stain', 'stain']
+[INFO] YOLO took 0.246404 seconds
+83 -101
+Shirt 0.9703336358070374
+['Shirt', 'stain', 'stain']
+[INFO] YOLO took 0.265593 seconds
+78 -97
+Shirt 0.9851101040840149
+['Shirt', 'stain']
+[INFO] YOLO took 0.234118 seconds
+80 -105
+Shirt 0.9878544807434082
+['Shirt', 'stain']
+[INFO] YOLO took 0.241149 seconds
+85 -115
+Shirt 0.9822649359703064
+['Shirt', 'stain', 'stain']
+[INFO] YOLO took 0.260619 seconds
+87 -117
+Shirt 0.9662752151489258
+['Shirt', 'stain', 'stain']
+[INFO] YOLO took 0.258200 seconds
+91 -109
+Shirt 0.8993056416511536
+['Shirt', 'stain', 'stain']
+[INFO] YOLO took 0.268510 seconds
+94 -115
+Shirt 0.8653687834739685
+['stain', 'Shirt', 'stain']
+[INFO] YOLO took 0.237483 seconds
+85 -126
+Shirt 0.8652822375297546
+Button 0.666391134262085
+Button 0.47726091742515564
+['Shirt', 'stain', 'stain', 'Button', 'Button']
+[INFO] YOLO took 0.269270 seconds
+Button 0.7114655375480652
+82 -137
+Shirt 0.5454638600349426
+Button 0.48450613021850586
+['stain', 'stain', 'Button', 'Shirt', 'Button']
+127.0.0.1 - - [04/Jun/2021 03:00:32] "GET /totalResult HTTP/1.1" 200 -
+[INFO] YOLO took 0.272945 seconds
+Button 0.6493092179298401
+78 -137
+Shirt 0.592779278755188
+Button 0.38950464129447937
+['stain', 'stain', 'Button', 'Shirt', 'Button']
+[INFO] YOLO took 0.262790 seconds
+79 -126
+Shirt 0.8413220643997192
+Button 0.6507483124732971
+Button 0.3044799864292145
+['Shirt', 'stain', 'stain', 'Button', 'Button']
+[INFO] YOLO took 0.236434 seconds
+82 -128
+Shirt 0.8303627371788025
+Button 0.6194071173667908
+Button 0.2016626000404358
+['stain', 'Shirt', 'stain', 'Button', 'Button']
+[INFO] YOLO took 0.237171 seconds
+Button 0.8033361434936523
+79 -130
+Shirt 0.7558802962303162
+Button 0.3692333400249481
+['stain', 'Button', 'Shirt', 'stain', 'Button']
+[INFO] YOLO took 0.243093 seconds
+Button 0.7342417240142822
+83 -127
+Shirt 0.6839436888694763
+Button 0.42624419927597046
+['stain', 'Button', 'Shirt', 'stain', 'Button']
+[INFO] YOLO took 0.262449 seconds
+80 -127
+Shirt 0.7313492894172668
+Button 0.5794952511787415
+Button 0.3597673773765564
+['stain', 'stain', 'Shirt', 'Button', 'Button']
+[INFO] YOLO took 0.253316 seconds
+80 -128
+Shirt 0.6925435066223145
+Button 0.6729228496551514
+Button 0.47429603338241577
+['stain', 'Shirt', 'Button', 'stain', 'Button']
+[INFO] YOLO took 0.253653 seconds
+Button 0.8591429591178894
+84 -129
+Shirt 0.769429087638855
+Button 0.4288826882839203
+['stain', 'Button', 'Shirt', 'stain', 'Button']
+[INFO] YOLO took 0.250326 seconds
+85 -113
+Shirt 0.8584645390510559
+Button 0.37741807103157043
+Button 0.28379058837890625
+['Shirt', 'stain', 'stain', 'Button', 'Button']
+[INFO] YOLO took 0.249935 seconds
+96 -96
+Shirt 0.2933940291404724
+['stain', 'stain', 'Shirt']
+[INFO] YOLO took 0.276008 seconds
+[]
+global clothes
+['Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt']
+summary
+['Shirt']
+
+
+""here -> 이걸로 stain 어떻게 할지 생각하기
+Shirt 0.8367970585823059
+['Button', 'stain', 'Shirt', 'stain'] [1, 2] [2220, 4170]
+[INFO] YOLO took 0.341732 seconds
+Button 0.8360596895217896
+56 -202
+Shirt 0.6421092748641968
+['stain', 'Button', 'stain', 'Shirt'] [1, 2, 2] [2220, 4170, 3899]
+[INFO] YOLO took 0.273694 seconds
+Button 0.8072771430015564
+98 -189
+Shirt 0.3554854989051819
+['stain', 'Button', 'stain', 'Shirt'] [1, 2, 2, 2] [2220, 4170, 3899, 3928]
+[INFO] YOLO took 0.252434 seconds
+91 -147
+Shirt 0.9583980441093445
+Button 0.8165559768676758
+['Shirt', 'stain', 'Button', 'stain'] [1, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778]
+[INFO] YOLO took 0.263313 seconds
+66 -171
+Shirt 0.9308871626853943
+Button 0.8702898621559143
+['Shirt', 'stain', 'Button', 'stain'] [1, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167]
+[INFO] YOLO took 0.217559 seconds
+65 -146
+Shirt 0.940563440322876
+Button 0.6047519445419312
+['Shirt', 'stain', 'Button', 'stain'] [1, 2, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167, 3517]
+[INFO] YOLO took 0.224802 seconds
+76 -146
+Shirt 0.9318937659263611
+Button 0.3418939411640167
+['Shirt', 'stain', 'stain', 'Button'] [1, 2, 2, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167, 3517, 3503]
+[INFO] YOLO took 0.209817 seconds
+78 -134
+Shirt 0.9404277801513672
+Button 0.5445665717124939
+['Shirt', 'stain', 'stain', 'Button'] [1, 2, 2, 2, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167, 3517, 3503, 3677]
+[INFO] YOLO took 0.210670 seconds
+70 -128
+Shirt 0.9032760262489319
+Button 0.5225216746330261
+['Shirt', 'stain', 'Button', 'stain'] [1, 2, 2, 2, 2, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167, 3517, 3503, 3677, 3650]
+[INFO] YOLO took 0.211075 seconds
+69 -134
+Shirt 0.8861836791038513
+Button 0.6114566326141357
+['Shirt', 'stain', 'Button', 'stain'] [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167, 3517, 3503, 3677, 3650, 3418]
+[INFO] YOLO took 0.216764 seconds
+71 -130
+Shirt 0.9366010427474976
+Button 0.6770774126052856
+['Shirt', 'stain', 'Button', 'stain'] [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167, 3517, 3503, 3677, 3650, 3418, 3307]
+[INFO] YOLO took 0.216559 seconds
+69 -129
+Shirt 0.9031783938407898
+Button 0.7648109793663025
+['Shirt', 'Button', 'stain', 'stain'] [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167, 3517, 3503, 3677, 3650, 3418, 3307, 3304]
+[INFO] YOLO took 0.226770 seconds
+70 -130
+Shirt 0.9136326313018799
+Button 0.7155718803405762
+['Shirt', 'stain', 'Button', 'stain'] [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167, 3517, 3503, 3677, 3650, 3418, 3307, 3304, 3364]
+[INFO] YOLO took 0.229242 seconds
+72 -131
+Shirt 0.9296891093254089
+Button 0.5234795212745667
+['Shirt', 'stain', 'stain', 'Button'] [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167, 3517, 3503, 3677, 3650, 3418, 3307, 3304, 3364, 3532]
+[INFO] YOLO took 0.223758 seconds
+67 -129
+Shirt 0.9027999043464661
+Button 0.683499276638031
+['Shirt', 'Button', 'stain', 'stain'] [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167, 3517, 3503, 3677, 3650, 3418, 3307, 3304, 3364, 3532, 3298]
+[INFO] YOLO took 0.212511 seconds
+68 -127
+Shirt 0.8725507855415344
+Button 0.8670865297317505
+['Shirt', 'Button', 'stain', 'stain'] [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167, 3517, 3503, 3677, 3650, 3418, 3307, 3304, 3364, 3532, 3298, 3250]
+[INFO] YOLO took 0.222214 seconds
+70 -133
+Shirt 0.911798894405365
+Button 0.8226832151412964
+['Shirt', 'Button', 'stain', 'stain'] [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167, 3517, 3503, 3677, 3650, 3418, 3307, 3304, 3364, 3532, 3298, 3250, 3364]
+[INFO] YOLO took 0.227395 seconds
+66 -128
+Shirt 0.9334146976470947
+Button 0.802940309047699
+['Shirt', 'Button', 'stain', 'stain'] [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167, 3517, 3503, 3677, 3650, 3418, 3307, 3304, 3364, 3532, 3298, 3250, 3364, 3390]
+[INFO] YOLO took 0.219250 seconds
+65 -128
+Shirt 0.9217724204063416
+Button 0.7035234570503235
+['Shirt', 'stain', 'Button', 'stain'] [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167, 3517, 3503, 3677, 3650, 3418, 3307, 3304, 3364, 3532, 3298, 3250, 3364, 3390, 3393]
+global clothes
+['Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt'] [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [2220, 4170, 3899, 3928, 3778, 3167, 3517, 3503, 3677, 3650, 3418, 3307, 3304, 3364, 3532, 3298, 3250, 3364, 3390, 3393]
+summary
+[]
+[INFO] YOLO took 0.214113 seconds
+71 -134
+Shirt 0.9080901741981506
+Button 0.6925070881843567
+['Shirt', 'stain', 'Button', 'stain'] [2] [3452]
+[INFO] YOLO took 0.209467 seconds
+67 -130
+Shirt 0.9270477890968323
+Button 0.8209362626075745
+['Shirt', 'Button', 'stain', 'stain'] [2, 2] [3452, 3396]
+[INFO] YOLO took 0.226207 seconds
+69 -129
+Shirt 0.9311132431030273
+Button 0.8490026593208313
+['Shirt', 'Button', 'stain', 'stain'] [2, 2, 2] [3452, 3396, 3511]
+[INFO] YOLO took 0.221570 seconds
+67 -131
+Shirt 0.9300684332847595
+Button 0.8232676386833191
+['Shirt', 'stain', 'Button', 'stain'] [2, 2, 2, 2] [3452, 3396, 3511, 3394]
+[INFO] YOLO took 0.206793 seconds
+74 -129
+Shirt 0.8922491669654846
+Button 0.8425516486167908
+['Shirt', 'Button', 'stain', 'stain'] [2, 2, 2, 2, 2] [3452, 3396, 3511, 3394, 3482]
+[INFO] YOLO took 0.218741 seconds
+69 -136
+Shirt 0.889015793800354
+Button 0.7416090369224548
+['Shirt', 'stain', 'Button', 'stain'] [2, 2, 2, 2, 2, 2] [3452, 3396, 3511, 3394, 3482, 3451]
+[INFO] YOLO took 0.212288 seconds
+70 -128
+Shirt 0.9206249713897705
+Button 0.8266393542289734
+['Shirt', 'Button', 'stain', 'stain'] [2, 2, 2, 2, 2, 2, 2] [3452, 3396, 3511, 3394, 3482, 3451, 3422]
+[INFO] YOLO took 0.215420 seconds
+68 -128
+Shirt 0.937478244304657
+Button 0.8550444841384888
+['Shirt', 'Button', 'stain', 'stain'] [2, 2, 2, 2, 2, 2, 2, 2] [3452, 3396, 3511, 3394, 3482, 3451, 3422, 3393]
+[INFO] YOLO took 0.226423 seconds
+71 -137
+Shirt 0.8601048588752747
+Button 0.8445000052452087
+['Shirt', 'Button', 'stain', 'stain'] [2, 2, 2, 2, 2, 2, 2, 2, 2] [3452, 3396, 3511, 3394, 3482, 3451, 3422, 3393, 3422]
+[INFO] YOLO took 0.210835 seconds
+Button 0.9008991718292236
+67 -130
+Shirt 0.8312355875968933
+['Button', 'Shirt', 'stain', 'stain'] [2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [3452, 3396, 3511, 3394, 3482, 3451, 3422, 3393, 3422, 3510]
+[INFO] YOLO took 0.215440 seconds
+68 -127
+Shirt 0.890531599521637
+Button 0.8266869783401489
+['Shirt', 'Button', 'stain', 'stain'] [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [3452, 3396, 3511, 3394, 3482, 3451, 3422, 3393, 3422, 3510, 3454]
+[INFO] YOLO took 0.213885 seconds
+Button 0.8667632937431335
+70 -126
+Shirt 0.8476155996322632
+['Button', 'Shirt', 'stain', 'stain'] [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [3452, 3396, 3511, 3394, 3482, 3451, 3422, 3393, 3422, 3510, 3454, 3512]
+[INFO] YOLO took 0.212659 seconds
+81 -122
+Shirt 0.8982815742492676
+Button 0.49450358748435974
+['Shirt', 'stain', 'stain', 'Button'] [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [3452, 3396, 3511, 3394, 3482, 3451, 3422, 3393, 3422, 3510, 3454, 3512, 3330]
+[INFO] YOLO took 0.226435 seconds
+80 -114
+Shirt 0.7129263281822205
+Button 0.6032577157020569
+['Shirt', 'stain', 'stain', 'Button'] [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] [3452, 3396, 3511, 3394, 3482, 3451, 3422, 3393, 3422, 3510, 3454, 3512, 3330, 3270]
+127.0.0.1 - - [04/Jun/2021 04:08:50] "GET /totalResult HTTP/1.1" 200 -
+[INFO] YOLO took 0.274551 seconds
+88 -122
+Shirt 0.9382035136222839
+Button 0.706672191619873
+['Shirt', 'stain', 'Button'] [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1] [3452, 3396, 3511, 3394, 3482, 3451, 3422, 3393, 3422, 3510, 3454, 3512, 3330, 3270, 1653]
+[INFO] YOLO took 0.304779 seconds
+82 -127
+Shirt 0.8666394948959351
+Button 0.8044993877410889
+['Shirt', 'Button', 'stain', 'stain'] [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2] [3452, 3396, 3511, 3394, 3482, 3451, 3422, 3393, 3422, 3510, 3454, 3512, 3330, 3270, 1653, 3334]
+[INFO] YOLO took 0.223529 seconds
+83 -141
+Shirt 0.7449575066566467
+Button 0.6065648794174194
+['Shirt', 'Button', 'stain'] [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1] [3452, 3396, 3511, 3394, 3482, 3451, 3422, 3393, 3422, 3510, 3454, 3512, 3330, 3270, 1653, 3334, 1508]
+[INFO] YOLO took 0.227432 seconds
+78 -137
+Shirt 0.7296043634414673
+Button 0.7019894123077393
+['Shirt', 'stain', 'Button'] [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 1] [3452, 3396, 3511, 3394, 3482, 3451, 3422, 3393, 3422, 3510, 3454, 3512, 3330, 3270, 1653, 3334, 1508, 1620]
+[INFO] YOLO took 0.211739 seconds
+83 -130
+Shirt 0.8751362562179565
+Button 0.5240765810012817
+['Shirt', 'stain', 'Button'] [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1] [3452, 3396, 3511, 3394, 3482, 3451, 3422, 3393, 3422, 3510, 3454, 3512, 3330, 3270, 1653, 3334, 1508, 1620, 1537]
+[INFO] YOLO took 0.207483 seconds
+75 -128
+Shirt 0.8455727696418762
+Button 0.7895092964172363
+['stain', 'Shirt', 'Button', 'stain'] [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1, 2] [3452, 3396, 3511, 3394, 3482, 3451, 3422, 3393, 3422, 3510, 3454, 3512, 3330, 3270, 1653, 3334, 1508, 1620, 1537, 3133]
+global clothes
+['Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt'] [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1, 2] [3452, 3396, 3511, 3394, 3482, 3451, 3422, 3393, 3422, 3510, 3454, 3512, 3330, 3270, 1653, 3334, 1508, 1620, 1537, 3133]
+summary
+['Shirt']
+[INFO] YOLO took 0.209251 seconds
+Button 0.8915575742721558
+76 -130
+Shirt 0.6947688460350037
+['Button', 'stain', 'Shirt', 'stain'] [2] [3308]
+[INFO] YOLO took 0.208212 seconds
+Button 0.9239028096199036
+75 -127
+Shirt 0.6355077624320984
+['Button', 'stain', 'Shirt', 'stain'] [2, 2] [3308, 3543]
+[INFO] YOLO took 0.213275 seconds
+Button 0.6315174102783203
+86 -118
+Shirt 0.5429512858390808
+['stain', 'Button', 'Shirt', 'stain'] [2, 2, 2] [3308, 3543, 3450]
+[INFO] YOLO took 0.226395 seconds
+Button 0.7859529256820679
+75 -122
+Shirt 0.7141538858413696
+['stain', 'Button', 'Shirt', 'stain'] [2, 2, 2, 2] [3308, 3543, 3450, 3450]
+[INFO] YOLO took 0.325155 seconds
+Button 0.8425244688987732
+77 -122
+Shirt 0.6865757703781128
+['Button', 'stain', 'Shirt', 'stain'] [2, 2, 2, 2, 2] [3308, 3543, 3450, 3450, 3421]
+[INFO] YOLO took 0.276313 seconds
+Button 0.8842458128929138
+73 -123
+Shirt 0.6486286520957947
+['stain', 'Button', 'Shirt', 'stain'] [2, 2, 2, 2, 2, 2] [3308, 3543, 3450, 3450, 3421, 3308]
+[INFO] YOLO took 0.228427 seconds
+94 -89
+Shirt 0.3981176018714905
+Button 0.20165202021598816
+['stain', 'stain', 'Shirt', 'Button'] [2, 2, 2, 2, 2, 2, 2] [3308, 3543, 3450, 3450, 3421, 3308, 3393]
+[INFO] YOLO took 0.210779 seconds
+154 -82
+Towel 0.8086547255516052
+Towel 0.6798577904701233
+['Towel', 'Towel'] [2, 2, 2, 2, 2, 2, 2, 0] [3308, 3543, 3450, 3450, 3421, 3308, 3393, 0]
+[INFO] YOLO took 0.206568 seconds
+Towel 0.4989919662475586
+['Towel'] [2, 2, 2, 2, 2, 2, 2, 0, 0] [3308, 3543, 3450, 3450, 3421, 3308, 3393, 0, 0]
+[INFO] YOLO took 0.228327 seconds
+Towel 0.9396951794624329
+Towel 0.8022093176841736
+['Towel', 'Towel'] [2, 2, 2, 2, 2, 2, 2, 0, 0, 0] [3308, 3543, 3450, 3450, 3421, 3308, 3393, 0, 0, 0]
+[INFO] YOLO took 0.228732 seconds
+136 -102
+Towel 0.9541686177253723
+['Towel'] [2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0] [3308, 3543, 3450, 3450, 3421, 3308, 3393, 0, 0, 0, 0]
+[INFO] YOLO took 0.210838 seconds
+128 -65
+Towel 0.6785554885864258
+['Towel'] [2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0] [3308, 3543, 3450, 3450, 3421, 3308, 3393, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.210352 seconds
+187 -92
+Towel 0.3947734832763672
+['Towel'] [2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0] [3308, 3543, 3450, 3450, 3421, 3308, 3393, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.212876 seconds
+Towel 0.21112163364887238
+['Towel'] [2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0] [3308, 3543, 3450, 3450, 3421, 3308, 3393, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.205226 seconds
+[] [2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0] [3308, 3543, 3450, 3450, 3421, 3308, 3393, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.220637 seconds
+[] [2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0] [3308, 3543, 3450, 3450, 3421, 3308, 3393, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.215872 seconds
+[] [2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [3308, 3543, 3450, 3450, 3421, 3308, 3393, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.220903 seconds
+174 -12
+Towel 0.47324803471565247
+['Towel'] [2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [3308, 3543, 3450, 3450, 3421, 3308, 3393, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.229168 seconds
+120 -91
+Towel 0.3058653771877289
+['Towel'] [2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [3308, 3543, 3450, 3450, 3421, 3308, 3393, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.215072 seconds
+177 -102
+Towel 0.9502860307693481
+['Towel'] [2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [3308, 3543, 3450, 3450, 3421, 3308, 3393, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+global clothes
+['Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Shirt', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel'] [2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [3308, 3543, 3450, 3450, 3421, 3308, 3393, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+summary
+['Shirt']
+[INFO] YOLO took 0.215547 seconds
+127 -110
+Towel 0.9600584506988525
+['Towel'] [0] [0]
+[INFO] YOLO took 0.216631 seconds
+144 -110
+Towel 0.8985469937324524
+['Towel'] [0, 0] [0, 0]
+[INFO] YOLO took 0.208246 seconds
+147 -99
+Towel 0.907852828502655
+['Towel'] [0, 0, 0] [0, 0, 0]
+[INFO] YOLO took 0.227739 seconds
+154 -105
+Towel 0.9392305612564087
+['Towel'] [0, 0, 0, 0] [0, 0, 0, 0]
+[INFO] YOLO took 0.209544 seconds
+153 -101
+Towel 0.7432509064674377
+['Towel'] [0, 0, 0, 0, 0] [0, 0, 0, 0, 0]
+[INFO] YOLO took 0.228490 seconds
+156 -101
+Towel 0.8387687802314758
+['Towel'] [0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.211254 seconds
+161 -101
+Towel 0.9178299903869629
+['Towel'] [0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.218062 seconds
+152 -96
+Towel 0.8608390092849731
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.236980 seconds
+163 -100
+Towel 0.8580239415168762
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.216741 seconds
+158 -92
+Towel 0.783714234828949
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.220827 seconds
+151 -95
+Towel 0.8161197900772095
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.213075 seconds
+149 -84
+Towel 0.8329552412033081
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.212184 seconds
+127.0.0.1 - - [04/Jun/2021 04:09:06] "GET /totalResult HTTP/1.1" 200 -
+152 -96
+Towel 0.9305010437965393
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.216348 seconds
+133 -91
+Towel 0.6450880169868469
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.227707 seconds
+108 -103
+Towel 0.5098956823348999
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.220726 seconds
+99 -113
+Towel 0.687263011932373
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.220030 seconds
+92 -133
+Towel 0.48386138677597046
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.218704 seconds
+78 -128
+Towel 0.913280189037323
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.231131 seconds
+70 -114
+Towel 0.9663263559341431
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.212093 seconds
+70 -117
+Towel 0.9332302212715149
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+global clothes
+['Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel', 'Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+summary
+['Shirt', 'Towel']
+[INFO] YOLO took 0.215946 seconds
+36 -116
+Towel 0.9815598726272583
+['Towel'] [0] [0]
+[INFO] YOLO took 0.217183 seconds
+107 -97
+Towel 0.9584000706672668
+['Towel'] [0, 0] [0, 0]
+[INFO] YOLO took 0.210602 seconds
+111 -100
+Towel 0.9844385385513306
+['Towel'] [0, 0, 0] [0, 0, 0]
+[INFO] YOLO took 0.214975 seconds
+81 -63
+Towel 0.9501926898956299
+['Towel'] [0, 0, 0, 0] [0, 0, 0, 0]
+[INFO] YOLO took 0.213058 seconds
+104 -45
+Towel 0.9766239523887634
+['Towel'] [0, 0, 0, 0, 0] [0, 0, 0, 0, 0]
+[INFO] YOLO took 0.219706 seconds
+109 -43
+Towel 0.980332612991333
+['Towel'] [0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.229214 seconds
+93 -83
+Towel 0.912182629108429
+['Towel'] [0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.223414 seconds
+101 -106
+Towel 0.9265797138214111
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.209270 seconds
+98 -109
+Towel 0.7346887588500977
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.213550 seconds
+95 -77
+Towel 0.9073288440704346
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.215018 seconds
+107 -117
+Towel 0.35642871260643005
+Towel 0.2937779128551483
+['Towel', 'Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.214679 seconds
+Towel 0.45747849345207214
+['Towel'] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.403422 seconds
+[] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.294324 seconds
+[] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[INFO] YOLO took 0.232940 seconds
+[] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]

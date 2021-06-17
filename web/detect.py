@@ -30,10 +30,10 @@ stain_cnt_per_laundry = []
 stain_area_per_laundry = []
 summary = []
 summaries = []
-
+predicted_cloth_label=''
 const_sec = 30
 STOP = False
-SECOND = 25  # 25 = 10second. If this value is changed, you need to change a value "SECOND" in index.html too.
+SECOND = 36  # 25 = 10second. If this value is changed, you need to change a value "SECOND" in index.html too.
 
 Manual = [{
     "key": 0,
@@ -184,7 +184,7 @@ def get_predection(image, net, LABELS, COLORS):
             if y < 10:
                 y = 30
             if width < w:
-                w = width-2*w
+                w = width-2*x
             if height < h:
                 h = height-2*y
             # if x < 10 or y < 10:
@@ -230,6 +230,7 @@ labelsPath = "data/obj.names"
 cfgpath = "data/yolov3-spp_custom.cfg"
 # cfgpath = "data/prior/yolov3-spp_custom.cfg"
 wpath = "data/yolov3-spp_custom_best.weights"
+# wpath = "data/yolov3-spp_custom_final.weights"
 Lables = get_labels(labelsPath)
 CFG = get_config(cfgpath)
 Weights = get_weights(wpath)
@@ -299,11 +300,11 @@ def gen(camera):
         image = cv2.cvtColor(res, cv2.COLOR_BGR2RGB)
         
         #화면에 타이머를 그려줌 
-        cv2.putText(image, str(second//5), (50,50),  
+        cv2.putText(image, str(second//2.5), (50,50),  
                         cv2.FONT_HERSHEY_SIMPLEX, 1.5, [0,0,0], 2) 
         cv2.imwrite(pic_name, image)  # 변환된 이미지나 동영상의 특정 프레임을 저장
         # cv2.imshow('output', image) #읽어들인 이미지 파일을 윈도우창에 보여줌
-        tem_message = ', '.join(labels)
+        
         # np_img = Image.fromarray(image)
         # img_encoded = image_to_byte_array(np_img)
         '''imwrite랑 yield가 같이 있어야 화면에서 보임.'''
@@ -313,6 +314,7 @@ def gen(camera):
         second -= 1
 
         if second == 0:
+            totalResult()
             print("global clothes")
             print(cloth_labels_per_laundry,
                   stain_cnt_per_laundry, stain_area_per_laundry)
@@ -334,34 +336,64 @@ def gen(camera):
             else:
                 break
 
+@app.route('/current_cloth')
+def current_cloth():
+    print("here")
+    return predicted_cloth_label
 
 @app.route("/predicted_result")
 def totalResult():
     # 세탁물의 옷 종류를 예측하기.
     global cloth_labels_per_laundry
-    if not cloth_labels_per_laundry:
-        predicted_cloth_label = " Nothing Detected "
+    global predicted_cloth_label
+    # if not cloth_labels_per_laundry:
+    #     predicted_cloth_label = " I'm not sure "
 
+    # else:
+    #     clothes = Counter(cloth_labels_per_laundry)
+    #     # 여러 결과 중에 가장 빈도 수가 높게 나타난 옷
+    #     predicted_cloth_label = clothes.most_common()[0][0]
+
+    #     # stain_cnt =  Counter(stain_cnt_per_laundry)
+    #     if stain_cnt_per_laundry:
+    #         predicted_stain_cnt = max(stain_cnt_per_laundry)
+
+    #     # stain_area = Counter(stain_area_per_laundry)
+    #     if stain_area_per_laundry:
+    #         predicted_stain_area = max(stain_area_per_laundry)
+
+    #     summaries.append(
+    #         {'cloth': predicted_cloth_label, 'stain_cnt': predicted_stain_cnt,
+    #             'stain_area': predicted_stain_area}
+    #     )
+    #     print('summaries')
+    #     print(summaries)
+    #     summary.append(predicted_cloth_label)  # 예측기록에 추가
+    predicted_stain_cnt =0
+    predicted_stain_area=0
+    if not cloth_labels_per_laundry:
+        predicted_cloth_label = " Not Sure "
     else:
         clothes = Counter(cloth_labels_per_laundry)
         # 여러 결과 중에 가장 빈도 수가 높게 나타난 옷
         predicted_cloth_label = clothes.most_common()[0][0]
 
-        # stain_cnt =  Counter(stain_cnt_per_laundry)
-        if stain_cnt_per_laundry:
-            predicted_stain_cnt = max(stain_cnt_per_laundry)
+    # stain_cnt =  Counter(stain_cnt_per_laundry)
+    if stain_cnt_per_laundry:
+        predicted_stain_cnt = max(stain_cnt_per_laundry)
 
-        # stain_area = Counter(stain_area_per_laundry)
-        if stain_area_per_laundry:
-            predicted_stain_area = max(stain_area_per_laundry)
+    # stain_area = Counter(stain_area_per_laundry)
+    if stain_area_per_laundry:
+        predicted_stain_area = max(stain_area_per_laundry)
 
-        summaries.append(
-            {'cloth': predicted_cloth_label, 'stain_cnt': predicted_stain_cnt,
-                'stain_area': predicted_stain_area}
-        )
-        print('summaries')
-        print(summaries)
-        summary.append(predicted_cloth_label)  # 예측기록에 추가
+    summaries.append(
+        {'cloth': predicted_cloth_label, 'stain_cnt': predicted_stain_cnt,
+            'stain_area': predicted_stain_area}
+    )
+    print('summaries')
+    print(summaries)
+    # print(predicted_cloth_label)
+    summary.append(predicted_cloth_label)  # 예측기록에 추가
 
     return predicted_cloth_label
 
@@ -390,37 +422,37 @@ def show_manual():
         if y != 0:
             Manual.append({
                 "key": 1,
-                "detergent": "중성세제 반컵 사용, 염소계표백제 사용 금지",
+                "detergent": "속옷) 중성세제 반컵 사용, 섬유유연제 사용 금지",
                 "temp": 40,
-                "washCycle": "헹굼 2회 + 탈수 약 + 건조 금지"
+                "washCycle": "헹굼 2회, 탈수 약, 건조 금지"
             })
             if total_stain_size_y > set_stain:
                 if Manual[1]["key"] == 1:
-                    Manual[1]["washCycle"] = "헹굼 3회 + 탈수 약 + 건조 금지 + 오염도 높음"
+                    Manual[1]["washCycle"] = "오염도 높기 때문에 헹굼 3회, 탈수 약, 건조 금지"
         if z != 0:
             Manual.append({
                 "key": 2,
-                "detergent": "중성세제 반컵 사용, 섬유유연제 & 염소계표백제 사용 금지",
+                "detergent": "수건) 중성세제 반컵 사용, 염소계표백제 사용 금지",
                 "temp": 40,
-                "washCycle": "헹굼 2회 + 탈수 약 + 건조 금지"
+                "washCycle": "헹굼 2회, 탈수 약, 건조 금지"
             })
             if total_stain_size_z > set_stain:
                 if Manual[1]["key"] == 2:
-                    Manual[1]["washCycle"] = "헹굼 3회 + 탈수 약 + 오염도 높음"
+                    Manual[1]["washCycle"] = "오염도 높기 때문에 헹굼 3회, 탈수 약"
                 elif Manual[2]["key"] == 2:
-                    Manual[2]["washCycle"] = "헹굼 3회 + 탈수 약 + 오염도 높음"
+                    Manual[2]["washCycle"] = "오염도 높기 때문에 헹굼 3회, 탈수 약"
         if x > 5:
             Manual[0] = {
                 "key": 3,
-                "detergent": "중성세제 한컵 사용",
+                "detergent": "세탁 양이 많기 때문에 중성세제 한컵 사용",
                 "temp": 40,
-                "washCycle": "헹굼 3회 + 탈수 중"
+                "washCycle": "헹굼 3회, 탈수 중"
             }
             if total_stain_size_x > set_stain:
-                Manual[0]["washCycle"] = "헹굼 4회 + 탈수 중 + 오염도 높음"
+                Manual[0]["washCycle"] = "오염도 높기 때문에 헹굼 4회, 탈수 중"
         elif x <= 5:
             if total_stain_size_x > set_stain:
-                Manual[0]["washCycle"] = "헹굼 3회 + 탈수 중 + 오염도 높음"
+                Manual[0]["washCycle"] = "오염도 높기 때문에 헹굼 3회, 탈수 중"
 
     print("manual::"+str(Manual))
     return jsonify(Manual)

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Bootstrap Material Admin by Bootstrapious.com</title>
+  <title>AI WASHER</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="robots" content="all,follow">
@@ -51,7 +51,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
             <!-- Navbar Header-->
             <div class="navbar-header">
               <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
-                <div class="brand-text d-none d-lg-inline-block"><span>CAPSTONE </span><strong>AIWasher</strong></div>
+                <div class="brand-text d-none d-lg-inline-block"><span>CAPSTONE &nbsp; </span><strong>AIWasher</strong></div>
                 <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div>
               </a>
               <!-- Toggle Button--><a id="toggle-btn" href="#"
@@ -79,7 +79,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
               <div class="chart col-lg-8 col-12">
                 <div class="bd-post-thumbnail mt-2 mb-4">
                   <div class="card">
-                    <img id="video" src="{{ url_for('video_feed') }}">
+                    <img style="height: 1000px;"id="video" src="{{ url_for('video_feed') }}">
                   </div>
                 </div>
               </div>
@@ -138,46 +138,12 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
                           </button>
                         </div>
                         <div class="modal-body">
-                          <div class="row bg-white has-shadow">
-                            <!-- Item1 -->
-                            <div class="col-xl-4 col-sm-6">
-                              <div class="item d-flex align-items-center">
-                                <div class="icon bg-violet"><i class="icon-user"></i></div>
-                                <div class="title"><span>Detergent</span>
-
-                                </div>
-
-                              </div>
-                              <div class=""><strong>중성세제 반컵 사용</strong></div>
-                            </div>
-                            <!-- Item2 -->
-                            <div class="col-xl-4 col-sm-6">
-                              <div class="item d-flex align-items-center">
-                                <div class="icon bg-red"><i class="icon-padnote"></i></div>
-                                <div class="title"><span>Temperature</span>
-                                </div>
-
-                              </div>
-                              <div class=""><strong>30</strong></div>
-                            </div>
-                            <!-- Item3 -->
-                            <div class="col-xl-4 col-sm-6">
-                              <div class="item d-flex align-items-center">
-                                <div class="icon bg-green"><i class="icon-bill"></i></div>
-                                <div class="title"><span>Wash Cycle</span>
-
-                                </div>
-
-                              </div>
-                              <div class=""><strong>헹굼 2회 + 탈수 중</strong></div>
-                            </div>
-
-                          </div>
+                         
                           <div class="row bg-white has-shadow">
                             <div class="table-responsive">
                               <table id="show_manual" class="table table-striped table-hover"
                                 style="width:100%;font-size: 1.4em;">
-                                <thead>
+                                <thead style="font-size: 1.5em !important;">
                                   <tr>
                                     <th></th>
                                     <th>세제 양</th>
@@ -227,12 +193,18 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
   <script>
 
     $(document).ready(function () {
-      var SECOND = 10000 //If this value is changed, you need to change a value "SECOND" in detect.py too.
-      getResult = setInterval("get_predicted_result()", SECOND);
+      var SECOND = 20000 //If this value is changed, you need to change a value "SECOND" in detect.py too.
+      // getResult = setInterval("get_predicted_result()", SECOND);
+      getResult = setInterval("get_current_result()", SECOND);
     });
 
-    function get_predicted_result() {
-      $("#predicted_result").load("/predicted_result", function () {
+    // function get_predicted_result() {
+    //   $("#predicted_result").load("/predicted_result", function () {
+    //     redrawTable();
+    //   });  //result를 가져오고 그 다음에 테이블을 그려줘야함. 
+    // }
+    function get_current_result() {
+      $("#predicted_result").load("/current_cloth", function () {
         redrawTable();
       });  //result를 가져오고 그 다음에 테이블을 그려줘야함. 
     }
@@ -290,24 +262,30 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" /> 
               "data": "id",
               "render": function (data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
+                // return '<strong>'+meta.row + meta.settings._iDisplayStart + 1+'</strong>';
+                // return '<div style="font-size:x-large;"><strong>'+meta.row + meta.settings._iDisplayStart + 1+'</strong></div>';
               }
             },
             {
               "data": "detergent",
               "render": function (data, type, row, meta) {
-                return '<div class="col-xl-4 col-sm-6"><div class="item d-flex align-items-center"><div class="icon bg-violet"><i class="icon-user"></i></div><div class="title"><span>Detergent  <strong>' + row.detergent + '</strong> </span></div></div></div>';
+                // return '<div class="col-xl-4 col-sm-6"><div class="item d-flex align-items-center"><div class="icon bg-violet"><i class="icon-user"></i></div><div class="title"><span>Detergent  <strong>' + row.detergent + '</strong> </span></div></div></div>';
+                return '<div class="item d-flex align-items-center"><div class="icon bg-violet"><i class="icon-bill"></i></div><div class="title"><span>Wash Cycle<br> <strong>' + row.detergent + '</strong> </span></div></div>';
+                // return ' <strong>' + row.detergent + '</strong> ';
               }
             },
             {
               "data": "temp",
               "render": function (data, type, row, meta) {
-                return '<div class="col-xl-4 col-sm-6"><div class="item d-flex align-items-center"><div class="icon bg-red"><i class="icon-padnote"></i></div><div class="title"><span>Temperature</span></div><div class="number"><strong>' + row.temp + '</strong></div></div></div>';
+                // return '<div class="col-xl-4 col-sm-6"><div class="item d-flex align-items-center"><div class="icon bg-red"><i class="icon-padnote"></i></div><div class="title"><span>Temperature</span></div><div class="number"><strong>' + row.temp + '</strong></div></div></div>';
+                return '<div class="item d-flex align-items-center"><div class="icon bg-red"><i class="icon-padnote"></i></div><div class="title"><span>Temperature <br> <strong>' + row.temp + '</strong></span></div></div>';
               }
             },
             {
               "data": "washCycle",
               "render": function (data, type, row, meta) {
-                return '<div class="col-xl-4 col-sm-6"><div class="item d-flex align-items-center"><div class="icon bg-green"><i class="icon-bill"></i></div><div class="title"><span>Wash Cycle <strong>' + row.washCycle + '</strong> </span></div></div></div>';
+                // return '<div class="col-xl-4 col-sm-6"><div class="item d-flex align-items-center"><div class="icon bg-green"><i class="icon-bill"></i></div><div class="title"><span>Wash Cycle <strong>' + row.washCycle + '</strong> </span></div></div></div>';
+                return '<div class="item d-flex align-items-center"><div class="icon bg-green"><i class="icon-bill"></i></div><div class="title"><span>Wash Cycle<br> <strong>' + row.washCycle + '</strong> </span></div></div>';
               }
             }
           ]
